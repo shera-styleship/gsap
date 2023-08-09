@@ -1,7 +1,7 @@
 # GSAP
-타임라인 기반의 애니메이션 자바스크립트 라이브러리
+타임라인 기반의 애니메이션 자바스크립트 라이브러리<br>
+[공식문서](https://greensock.com/docs/v3)
 
-<br>
 
 ## GSAP엔진을 이용해 제어할 수 있는 속성
 - Create animations
@@ -106,8 +106,8 @@ tween.restart();
 [예제사이트](https://codepen.io/kindtigerr/pen/poaMRJV?editors=1111)
 
 ### 타임라인
-타임라인은 gsap.timeline()으로 생성
 
+타임라인은 gsap.timeline()으로 생성
 
 ```
 gsap.timeline()
@@ -119,5 +119,52 @@ gsap.timeline()
 ```
 
 
+```
+대상의 크기만큼 이동할때에는 px말고 %로 이동하는게 좋다.
+x: “100%”
+`xPercent(100)   =  transform:translateX(100%)`
 
+`yPercent(100)   =  transform:translateY(100%)`
+```
+
+[예제](https://codepen.io/kindtigerr/pen/GRQVWmB)
+
+```
+gsap.timeline()
+  .from('.sun',{duration:1,opacity:0,x:50,y:50})
+  .from('.gress',{duration:1,opacity:0,y:100,stagger:0.2})
+  .from('.bird',{duration:1,opacity:0,y:100})
+  .from('.music',{duration:1,opacity:0,x:100,y:100})
+```
+
+
+### Position Parameter 시각적 효과
+
+타임라인 위치 매개변수 설정<br>
+위치 매개변수를 사용하면 타임라인에서 트윈의 시작 시간을 오프셋 할 수 있다.
+
+
+[예제](https://codepen.io/kindtigerr/pen/GRQVWmB)
+
+```
+ const tl = gsap.timeline();
+  tl.to(object, {y:300}, "+=1")  // 이전 트윈 종료 후 1초 뒤에 시작
+  tl.to(object, {x:300}, "-=1")  // 이전 트윈 종료 1초 전에 시작
+  tl.to(object, {rotation:90}, "<")  // 이전 트윈 시작될 때 동시에 실행
+  tl.to(object, {opacity:0.5}, "<1") // 이전 트윈 시작 된 후 1초 뒤에 실행
+  tl.to(object2, {x:200}, 1) // 타임라인 1초에 실행 
+```
+
+
+### 단일메뉴 효과
+애니메이션 버튼이나 GSAP 의 다른요소에 인터렉션을 추가하는것은 CSS 애니메이션이랑 약간 다름.
+
+CSS 는 기본 클래스에서 :hover 선택자를 이용해서 여기에 자연스러운 효과(정확한 타이밍이 필요한 여러 객체들을 컨트롤 하거나 재색, 되돌아가기, 속도,기속도 설정)를 주기위해서는
+gsap의 애니메이션이 훨씬 더 많은 유연성이 있음.
+
+GSAP를 사용해서 작업할때는 paused된 에니메이션 객체(tween or timeline)을 생성.
+javascript의 mouse event를 사용해(mouseenter, mouseleave)애니메이션 객체에 play() 또는 
+reverse()를 적용한다.
+
+[예제](https://codepen.io/kindtigerr/pen/jOZgmJG)
 
