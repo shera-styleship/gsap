@@ -3,61 +3,35 @@
 [공식문서](https://greensock.com/docs/v3)
 
 
-## GSAP엔진을 이용해 제어할 수 있는 속성
+### GSAP엔진을 이용해 제어할 수 있는 속성
 - Create animations
 - Configure settings
 - Register plugins, eases, and effects
 - Global control over all animations
 
 
-
 ### Common methods for creating a Tween
-
 gsap.to()
 
-```
+```jsx
 gsap.to('.elem',{duration:1,x:100,y:100,rotation:45});
 ```
 
 gsap.from()
 
 메서드는 지정한 값(위치)에서 부터 원래의 값(위치)으로 애니메이션 
-```
+```jsx
 gsap.from('.orange',{x:400, y:400});
 ```
 
 gsap.fromTo()
-```
+```jsx
 gsap.fromTo(".orange", 
     {x:700, y:400, scale:1, opacity:0, duration:1},
-	{x:400, y:200, scale:3, opacity:1, duration:3});
+	  {x:400, y:200, scale:3, opacity:1, duration:3});
 ```
 [예시](https://codepen.io/GreenSock/pen/wvwEOZL)
 
-
-### Staggers 
-  개체의 애니메이션의 시작 사이에 약간의 지연시간을 넣어 보다 쉽게 제어 가능
-[예시](https://codepen.io/GreenSock/pen/RwbZaZK)
-
-### Timeline
-타임라인 사용으로 복잡한 시퀀스의 애니메이션을 간단하게 만들 수 있음.
-
-```
-var tl = gsap.timeline();
-
-
-tl.to(".green", {duration: 1, x: 200});
-tl.to(".orange", {duration: 1, x: 200, scale: 0.2});
-tl.to(".grey", {duration: 1, x: 200, scale: 2, y: 20});
-
-```
-
-```
-브라우저 성능을 고려 한다면 ..
-
-브라우저 성능을 최대치로 끌어올리기 위해선 CSS Transform과 Opacity의 애니메이션을 사용하길권함.
-CSS Transform 과  Opacity 가 아닌 값을 변경하면 브라우저가 페이지 레이아웃을 다시 랜더링(re-rander)하여 트윈이 많을 경우 성능을 저하시킬 수 있음.
-```
 
 ### 지연 과 반복
 - delay : 애니메이션이 시작되기 전에 지연시간을 지정.
@@ -69,11 +43,20 @@ CSS Transform 과  Opacity 가 아닌 값을 변경하면 브라우저가 페이
 
 ! yoyo 속성은 <u>repeat</u> 설정이 들어있어야 사용가능
 
+[예시](https://codepen.io/shera9961/pen/ZEmNBxe)
 
+```jsx
+gsap.to(".orange", {x:300, repeat:-1, yoyo:true, repeatDelay:1});
+```
 ### 가속도
 ease는 애니메이션이 재생될 때의 변경 속도를 제어함.
 
 [참고사이트](https://greensock.com/docs/v3/Eases?ref=6234)
+
+
+### Staggers 
+  개체의 애니메이션의 시작 사이에 약간의 지연시간을 넣어 보다 쉽게 제어 가능
+[예시](https://codepen.io/GreenSock/pen/RwbZaZK)
 
 
 ### 다중요소 제어
@@ -101,25 +84,38 @@ tween.pause();
 tween.resume();
 tween.reverse();
 tween.restart();
-
 ```
+
 [예제사이트](https://codepen.io/kindtigerr/pen/poaMRJV?editors=1111)
+
+
+
+### Timeline
+타임라인 사용으로 복잡한 시퀀스의 애니메이션을 간단하게 만들 수 있음.
+
+
 
 ### 타임라인
 
 타임라인은 gsap.timeline()으로 생성
 
-```
+```jsx
 gsap.timeline()
   .from('.sun',{duration:1,opacity:0,x:50,y:50})
   .from('.gress',{duration:1,opacity:0,y:100,stagger:0.2})
   .from('.bird',{duration:1,opacity:0,y:100})
   .from('.music',{duration:1,opacity:0,x:100,y:100})
 
-```
 
-
+var tl = gsap.timeline();
+tl.to(".green", {duration: 1, x: 200});
 ```
+```
+브라우저 성능을 고려 한다면 ..
+
+브라우저 성능을 최대치로 끌어올리기 위해선 CSS Transform과 Opacity의 애니메이션을 사용하길권함.
+CSS Transform 과  Opacity 가 아닌 값을 변경하면 브라우저가 페이지 레이아웃을 다시 랜더링(re-rander)하여 트윈이 많을 경우 성능을 저하시킬 수 있음.
+
 대상의 크기만큼 이동할때에는 px말고 %로 이동하는게 좋다.
 x: “100%”
 `xPercent(100)   =  transform:translateX(100%)`
@@ -127,9 +123,9 @@ x: “100%”
 `yPercent(100)   =  transform:translateY(100%)`
 ```
 
-[예제](https://codepen.io/kindtigerr/pen/GRQVWmB)
+[예제](https://codepen.io/shera9961/pen/vYQwybM)
 
-```
+```js
 gsap.timeline()
   .from('.sun',{duration:1,opacity:0,x:50,y:50})
   .from('.gress',{duration:1,opacity:0,y:100,stagger:0.2})
@@ -146,7 +142,7 @@ gsap.timeline()
 
 [예제](https://codepen.io/kindtigerr/pen/GRQVWmB)
 
-```
+```js
  const tl = gsap.timeline();
   tl.to(object, {y:300}, "+=1")  // 이전 트윈 종료 후 1초 뒤에 시작
   tl.to(object, {x:300}, "-=1")  // 이전 트윈 종료 1초 전에 시작
@@ -167,4 +163,7 @@ javascript의 mouse event를 사용해(mouseenter, mouseleave)애니메이션 �
 reverse()를 적용한다.
 
 [예제](https://codepen.io/kindtigerr/pen/jOZgmJG)
+
+
+
 
