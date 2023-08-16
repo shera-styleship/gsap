@@ -3,34 +3,48 @@
 [공식문서](https://greensock.com/docs/v3)
 
 
+### 환경구성
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.2/gsap.min.js"><script>
+```
+[gsap 설치가이드](https://greensock.com/docs/v3/Installation)
+
+
 ### GSAP엔진을 이용해 제어할 수 있는 속성
 - Create animations
 - Configure settings
 - Register plugins, eases, and effects
 - Global control over all animations
 
+Create animations 파트에서는 크게 Tweens 과 Timelines 두가지의 오브젝트를 가지고 있음.
+
+
+### tweens
+Tweens는 모든 애니메이션이 작동하는 역할을 말하며,  ( high-performance property setter  )
+대상 ( 애니메이션을 적용할 객체) 에게 duration, animation-properties 정보를 입력하는 하나의 단위로 해석함.
+
 
 ### Common methods for creating a Tween
 gsap.to()
 
-```jsx
+```js
 gsap.to('.elem',{duration:1,x:100,y:100,rotation:45});
 ```
 
 gsap.from()
 
 메서드는 지정한 값(위치)에서 부터 원래의 값(위치)으로 애니메이션 
-```jsx
+```js
 gsap.from('.orange',{x:400, y:400});
 ```
 
 gsap.fromTo()
-```jsx
+```js
 gsap.fromTo(".orange", 
     {x:700, y:400, scale:1, opacity:0, duration:1},
-	  {x:400, y:200, scale:3, opacity:1, duration:3});
+    {x:400, y:200, scale:3, opacity:1, duration:3});
 ```
-[예시](https://codepen.io/GreenSock/pen/wvwEOZL)
+[예시](https://codepen.io/shera9961/pen/XWyLpEB)
 
 
 ### 지연 과 반복
@@ -54,22 +68,25 @@ ease는 애니메이션이 재생될 때의 변경 속도를 제어함.
 [참고사이트](https://greensock.com/docs/v3/Eases?ref=6234)
 
 
-### Staggers 
-  개체의 애니메이션의 시작 사이에 약간의 지연시간을 넣어 보다 쉽게 제어 가능
-[예시](https://codepen.io/GreenSock/pen/RwbZaZK)
-
-
 ### 다중요소 제어
-stagger속성을 사용하면 단일 트윈에서 여러 대상의 시작 시간을 오프셋 설정할 수 있음.
+stagger속성을 사용하면 단일 트윈에서 여러 대상의 시작 시간을 오프셋 설정할 수 있음.<br>
+[예시](https://codepen.io/shera9961/pen/yLQmVjy)
 
 ```
+from 으로 받을 수 있는 값
+
+first, end, center, edges
+```
+
+```js
 gsap.to(".stage .box", {y:-50, stagger:{
   each:0.2,
   from:"end"
   }
 });
 ```
-[예제사이트](https://codepen.io/kindtigerr/pen/bGLXBzq)
+[예제사이트](https://codepen.io/shera9961/pen/vYQoyjRq)
+
 
 
 ### 트윈컨트롤
